@@ -65,6 +65,30 @@ class UIDartState : public tonic::DartState {
   bool is_controller_state_;
   bool shutting_down_ = false;
 };
+    class UIJavascriptState {
+    public:
+        UIJavascriptState(std::unique_ptr<Window> window, int dirfd = -1);
+        
+        static UIJavascriptState* Current();
+        const std::string& debug_name() const { return debug_name_; }
+        Window* window() const { return window_.get(); }
+        // setters
+        void set_debug_name_prefix(const std::string& debug_name_prefix);
+        void set_font_selector(PassRefPtr<FontSelector> selector);
+        PassRefPtr<FontSelector> font_selector();
+        bool is_controller_state() const { return is_controller_state_; }
+        void set_is_controller_state(bool value) { is_controller_state_ = value; }
+        bool shutting_down() const { return shutting_down_; }
+        void set_shutting_down(bool value) { shutting_down_ = value; }
+    private:
+        
+        std::string debug_name_prefix_;
+        std::string debug_name_;
+        std::unique_ptr<Window> window_;
+        RefPtr<FontSelector> font_selector_;
+        bool is_controller_state_;
+        bool shutting_down_ = false;
+    };
 
 }  // namespace blink
 

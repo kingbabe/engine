@@ -58,5 +58,27 @@ PassRefPtr<FontSelector> UIDartState::font_selector() {
 void UIDartState::set_debug_name_prefix(const std::string& debug_name_prefix) {
   debug_name_prefix_ = debug_name_prefix;
 }
+  // global Javascript State Instance
+  static UIJavascriptState *globalJSState = NULL;
+  UIJavascriptState::UIJavascriptState(std::unique_ptr<Window> window, int dirfd)
+  : window_(std::move(window)) {
+    globalJSState = this;
+  }
+  
+  UIJavascriptState* UIJavascriptState::Current() {
+    return globalJSState;
+  }
+  
+  void UIJavascriptState::set_debug_name_prefix(const std::string& debug_name_prefix) {
+    debug_name_prefix_ = debug_name_prefix;
+  }
+  void UIJavascriptState::set_font_selector(PassRefPtr<FontSelector> selector) {
+    font_selector_ = selector;
+  }
+  PassRefPtr<FontSelector> UIJavascriptState::font_selector() {
+    return font_selector_;
+  }
+  
+  
 
 }  // namespace blink

@@ -14,6 +14,7 @@
 
 namespace blink {
 class UIDartState;
+class UIJavascriptState;
 
 class DartController {
  public:
@@ -50,6 +51,21 @@ class DartController {
 
   FXL_DISALLOW_COPY_AND_ASSIGN(DartController);
 };
+  
+  class JavascriptController {
+  public:
+    JavascriptController();
+    ~JavascriptController();
+    
+    bool RunFromScriptSnapshot(const std::string script, const std::string& entrypoint = main_entrypoint_);
+    UIJavascriptState* javascript_state() const { return ui_js_state_; }
+  private:
+    //actually run method
+    bool SendStartMessage(void* jsDelegate, const std::string& entrypoint = main_entrypoint_);
+    static const std::string main_entrypoint_;
+    UIJavascriptState* ui_js_state_;
+    FXL_DISALLOW_COPY_AND_ASSIGN(JavascriptController);
+  };
 }  // namespace blink
 
 #endif  // FLUTTER_RUNTIME_DART_CONTROLLER_H_

@@ -15,6 +15,7 @@
 
 namespace blink {
 class DartController;
+class JavascriptController;
 class DartLibraryProvider;
 class Scene;
 class RuntimeDelegate;
@@ -51,7 +52,13 @@ class RuntimeController : public WindowClient, public IsolateClient {
   std::string GetIsolateName();
   bool HasLivePorts();
   tonic::DartErrorHandleType GetLastError();
-
+  
+  /*
+   new
+   */
+  void CreateJSController(const std::string& script_uri);
+  JavascriptController* js_controller() const { return js_controller_.get(); }
+  
  private:
   explicit RuntimeController(RuntimeDelegate* client);
 
@@ -72,6 +79,8 @@ class RuntimeController : public WindowClient, public IsolateClient {
   std::string user_settings_data_ = "{}";
   bool semantics_enabled_ = false;
   std::unique_ptr<DartController> dart_controller_;
+  // new
+  std::unique_ptr<JavascriptController> js_controller_;
 
   FXL_DISALLOW_COPY_AND_ASSIGN(RuntimeController);
 };

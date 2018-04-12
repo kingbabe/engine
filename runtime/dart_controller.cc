@@ -246,5 +246,16 @@ void DartController::CreateIsolateFor(const std::string& script_uri,
   }
   Dart_ExitIsolate();
 }
+  
+  // JavascriptController Initializer
+  JavascriptController::JavascriptController():ui_js_state_(nullptr) {}
+  JavascriptController::~JavascriptController() {
+    if (ui_js_state_) {
+      if (!ui_js_state_->shutting_down()) {
+        // do something to shutdown
+      }
+    }
+  }
+  
 
 }  // namespace blink

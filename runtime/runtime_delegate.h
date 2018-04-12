@@ -26,6 +26,10 @@ class RuntimeDelegate {
   virtual void DidCreateMainIsolate(Dart_Isolate isolate);
   virtual void DidCreateSecondaryIsolate(Dart_Isolate isolate);
   virtual void DidShutdownMainIsolate();
+  
+  // new javascript
+//  virtual void DidCreateJSVirtualMachine(void* virtualMachine);
+//  virtual void DidDestroyJSVirtualMachine();
 
  protected:
   virtual ~RuntimeDelegate();

@@ -61,7 +61,7 @@ class DartController {
     UIJavascriptState* javascript_state() const { return ui_js_state_; }
   private:
     //actually run method
-    bool SendStartMessage(void* jsDelegate, const std::string& entrypoint = main_entrypoint_);
+    bool SendStartMessage(void* jsScope, const std::string& entrypoint = main_entrypoint_);
     static const std::string main_entrypoint_;
     UIJavascriptState* ui_js_state_;
     FXL_DISALLOW_COPY_AND_ASSIGN(JavascriptController);

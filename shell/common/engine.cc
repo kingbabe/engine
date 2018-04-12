@@ -600,9 +600,10 @@ void Engine::ConfigureRuntime(const std::string& script_uri,
     return;
   }
   runtime_ = blink::RuntimeController::Create(this);
-  runtime_->CreateDartController(std::move(script_uri),
-                                 default_isolate_snapshot_data,
-                                 default_isolate_snapshot_instr);
+//  runtime_->CreateDartController(std::move(script_uri),
+//                                 default_isolate_snapshot_data,
+//                                 default_isolate_snapshot_instr);
+  runtime_->CreateJSController(std::move(script_uri));
   runtime_->SetViewportMetrics(viewport_metrics_);
   runtime_->SetLocale(language_code_, country_code_);
   runtime_->SetUserSettingsData(user_settings_data_);
@@ -703,5 +704,13 @@ bool Engine::GetAssetAsBuffer(const std::string& name,
            asset_provider_->GetAsBuffer(name, data)) ||
           (asset_store_ && asset_store_->GetAsBuffer(name, data)));
 }
+  
+//  void Engine::DidCreateJSVirtualMachine(void *virtualMachine) {
+//    // TODO:
+//  }
+//  
+//  void Engine::DidDestroyJSVirtualMachine() {
+//    // TODO:
+//  }
 
 }  // namespace shell

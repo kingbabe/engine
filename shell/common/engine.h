@@ -89,6 +89,10 @@ class Engine : public blink::RuntimeDelegate {
       fxl::RefPtr<blink::PlatformMessage> message) override;
   void DidCreateMainIsolate(Dart_Isolate isolate) override;
   void DidCreateSecondaryIsolate(Dart_Isolate isolate) override;
+  
+  // new
+//  void DidCreateJSVirtualMachine(void* virtualMachine) override;
+//  void DidDestroyJSVirtualMachine() override;
 
   void StopAnimator();
   void StartAnimatorIfPossible();

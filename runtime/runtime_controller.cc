@@ -85,6 +85,9 @@ void RuntimeController::BeginFrame(fxl::TimePoint frame_time) {
 }
 
 void RuntimeController::NotifyIdle(int64_t deadline) {
+  if (js_controller_) {
+    return;
+  }
   UIDartState* dart_state = dart_controller_->dart_state();
   if (!dart_state) {
     return;
@@ -116,6 +119,9 @@ void RuntimeController::DispatchSemanticsAction(int32_t id,
 }
 
 Window* RuntimeController::GetWindow() {
+  if (js_controller_) {
+    return js_controller_->javascript_state()->window();
+  }
   return dart_controller_->dart_state()->window();
 }
 
@@ -191,5 +197,9 @@ tonic::DartErrorHandleType RuntimeController::GetLastError() {
   }
   return dart_state->message_handler().isolate_last_error();
 }
+  
+  void RuntimeController::CreateJSController(const std::string &script_uri) {
+    // TODO:
+  }
 
 }  // namespace blink
